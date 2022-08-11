@@ -1,0 +1,10 @@
+{
+  "appName": "istio-ingressgateway",
+  "userGivenName": "istio-ingressgateway",
+  "destNamespace": "istio-system",
+  "destServer": "https://kubernetes.default.svc",
+  "srcPath": "apps/istio-ingressgateway/overlays/prod",
+  "srcRepoURL": "https://github.com/stealth-aurelius/local-dev-cluster.git",
+  "srcTargetRevision": "",
+  "labels": null
+}

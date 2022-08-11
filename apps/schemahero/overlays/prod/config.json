@@ -1,0 +1,10 @@
+{
+  "appName": "schemahero",
+  "userGivenName": "schemahero",
+  "destNamespace": "schemahero-system",
+  "destServer": "https://kubernetes.default.svc",
+  "srcPath": "apps/schemahero/overlays/prod",
+  "srcRepoURL": "https://github.com/stealth-aurelius/local-dev-cluster.git",
+  "srcTargetRevision": "",
+  "labels": null
+}

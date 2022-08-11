@@ -1,0 +1,10 @@
+{
+  "appName": "demoapp",
+  "userGivenName": "demoapp",
+  "destNamespace": "prod",
+  "destServer": "https://kubernetes.default.svc",
+  "srcPath": "apps/demoapp/overlays/prod",
+  "srcRepoURL": "https://github.com/stealth-aurelius/local-dev-cluster.git",
+  "srcTargetRevision": "",
+  "labels": null
+}

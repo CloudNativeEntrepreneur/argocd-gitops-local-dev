@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: knative-eventing
+resources:
+  - eventing.yaml
+  - eventing-kafka-controller.yaml
+  - eventing-kafka-broker.yaml
+patches:
+  - target:
+      kind: ConfigMap
+      name: kafka-broker-config
+      namespace: knative-eventing
+    patch: |-
+      - op: replace
+        path: /data/bootstrap.servers
+        value: kafkabus-kafka-bootstrap.strimzi.svc.cluster.local:9092
+  - target:
+      kind: ConfigMap
+      name: kafka-channel-config
+      namespace: knative-eventing
+    patch: |-
+      - op: replace
+        path: /data/bootstrap.servers
+        value: kafkabus-kafka-bootstrap.strimzi.svc.cluster.local:9092
