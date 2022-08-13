@@ -13,7 +13,7 @@ metadata:
   name: keycloak-operator
   namespace: auth
 spec:
-  channel: alpha
+  channel: candidate
   name: keycloak-operator
   source: operatorhubio-catalog
   sourceNamespace: operator-lifecycle-manager
