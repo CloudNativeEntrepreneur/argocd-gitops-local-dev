@@ -12,5 +12,5 @@ spec:
   - route:
     - destination:
         port:
-          number: 8443
-        host: keycloak
+          number: 8080
+        host: keycloak-discovery
