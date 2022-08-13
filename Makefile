@@ -7,22 +7,22 @@ download-argocd-image-updater:
 
 
 download-knative-operator:
-	curl -L https://github.com/knative/operator/releases/download/knative-v1.4.0/operator.yaml \
+	curl -L https://github.com/knative/operator/releases/download/knative-v1.6.0/operator.yaml \
 		| sed 's/namespace: default/namespace: knative-operator/' \
-		> apps/knative/base/operator.yaml
+		> apps/knative-operator/base/operator.yaml
 
 download-knative-serving:
-	curl -L https://github.com/knative/serving/releases/download/knative-v1.4.0/serving-default-domain.yaml > apps/knative-serving/base/serving-default-domain.yaml
+	curl -L https://github.com/knative/serving/releases/download/knative-v1.6.0/serving-default-domain.yaml > apps/knative-serving/base/serving-default-domain.yaml
 
 download-knative-eventing:
-	curl -L https://github.com/knative-sandbox/eventing-kafka-broker/releases/download/knative-v1.4.0/eventing-kafka-controller.yaml > apps/knative-eventing/base/eventing-kafka-controller.yaml
-	curl -L https://github.com/knative-sandbox/eventing-kafka-broker/releases/download/knative-v1.4.0/eventing-kafka-broker.yaml > apps/knative-eventing/base/eventing-kafka-broker.yaml
+	curl -L https://github.com/knative-sandbox/eventing-kafka-broker/releases/download/knative-v1.6.0/eventing-kafka-controller.yaml > apps/knative-eventing/base/eventing-kafka-controller.yaml
+	curl -L https://github.com/knative-sandbox/eventing-kafka-broker/releases/download/knative-v1.6.0/eventing-kafka-broker.yaml > apps/knative-eventing/base/eventing-kafka-broker.yaml
 
 download-olm:
 	mkdir -p apps/olm/base/charts/olm
-	mkdir -p .tmp && cd .tmp && curl -L https://github.com/operator-framework/operator-lifecycle-manager/archive/v0.21.1.tar.gz | tar zx
-	mv .tmp/operator-lifecycle-manager-0.21.1/deploy/chart/* apps/olm/base/charts/olm
-	rm -rf .tmp/operator-lifecycle-manager-0.21.1
+	mkdir -p .tmp && cd .tmp && curl -L https://github.com/operator-framework/operator-lifecycle-manager/archive/v0.21.2.tar.gz | tar zx
+	mv .tmp/operator-lifecycle-manager-0.21.2/deploy/chart/* apps/olm/base/charts/olm
+	rm -rf .tmp/operator-lifecycle-manager-0.21.2
 
 download-schemahero:
 	kubectl schemahero install --yaml > ./apps/schemahero/base/schemahero.yaml

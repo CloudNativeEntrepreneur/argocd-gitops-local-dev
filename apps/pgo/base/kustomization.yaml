@@ -5,12 +5,12 @@ helmCharts:
 - name: postgres-operator
   includeCRDs: true
   releaseName: postgres-operator
-  version: 1.8.0
+  version: 1.8.2
   repo: https://opensource.zalando.com/postgres-operator/charts/postgres-operator/
   namespace: pgo
 - name: postgres-operator-ui
   includeCRDs: true
   releaseName: postgres-operator-ui
-  version: 1.8.0
+  version: 1.8.2
   repo: https://opensource.zalando.com/postgres-operator/charts/postgres-operator-ui/
   namespace: pgo

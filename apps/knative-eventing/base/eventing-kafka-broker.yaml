@@ -17,8 +17,70 @@ metadata:
   name: config-kafka-broker-data-plane
   namespace: knative-eventing
   labels:
-    kafka.eventing.knative.dev/release: "devel"
+    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
+  annotations:
+    knative.dev/example-checksum: "57a32008"
 data:
+  _example: |
+    ################################
+    #                              #
+    #    EXAMPLE CONFIGURATION     #
+    #                              #
+    ################################
+
+    # This block is not actually functional configuration,
+    # but serves to illustrate the available configuration
+    # options and document them in a way that is accessible
+    # to users that `kubectl edit` this config map.
+    #
+    # These sample configuration options may be copied out of
+    # this example block and unindented to be in the data block
+    # to actually change the configuration.
+
+    # All configurations in this ConfigMap are globally applied to each
+    # resource and there is no way to change them on a per-resource basis,
+    # unless otherwise specified.
+
+    # Producer configuration are documented in https://kafka.apache.org/documentation/#producerconfigs
+    # Some configurations might be forced by the actual code to make sure we respect the Knative Eventing
+    # delivery constraints, for example, `key.serializer` and `value.serializer`.
+    config-kafka-broker-producer.properties: |
+      key.serializer=org.apache.kafka.common.serialization.StringSerializer
+      value.serializer=io.cloudevents.kafka.CloudEventSerializer
+      acks=all
+
+    # Consumer configuration are documented in https://kafka.apache.org/documentation/#consumerconfigs.
+    # Some configurations might be forced by the actual code to make sure we respect the Knative Eventing
+    # delivery constraints, for example, `key.deserializer` and `value.deserializer`.
+    config-kafka-broker-consumer.properties: |
+      key.deserializer=org.apache.kafka.common.serialization.StringDeserializer
+      value.deserializer=io.cloudevents.kafka.CloudEventDeserializer
+      fetch.min.bytes=1
+
+    # Available Vertx HTTPServerOptions are documented in
+    # https://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerOptions.html.
+    #
+    # Each receiver pod creates a single HTTP server.
+    #
+    # The mapping is the following:
+    #  for each method starting with `set` there is a property that can be set with the name that follows the `set`
+    #  prefix starting with a lowercase letter.
+    # For example, there is a method called `setIdleTimeout` and the associated property is `idleTimeout`.
+    config-kafka-broker-httpserver.properties: |
+      idleTimeout=0
+
+    # Available Vertx WebClientOptions are documented in
+    # https://vertx.io/docs/apidocs/io/vertx/ext/web/client/WebClientOptions.html.
+    #
+    # Each egress resource (KafkaSource, Trigger, Subscription) creates an HTTP client in each pod where the resource is
+    # scheduled, meaning that a client isn't shared across multiple resources to provide better isolation.
+    #
+    # The mapping is the following:
+    #  for each method starting with `set` there is a property that can be set with the name that follows the `set`
+    #  prefix starting with a lowercase letter.
+    # For example, there is a method called `setIdleTimeout` and the associated property is `idleTimeout`.
+    config-kafka-broker-webclient.properties: |
+      idleTimeout=10000
   config-kafka-broker-producer.properties: |
     key.serializer=org.apache.kafka.common.serialization.StringSerializer
     value.serializer=io.cloudevents.kafka.CloudEventSerializer
@@ -35,7 +97,7 @@ data:
     max.request.size=1048576
     partitioner.class=org.apache.kafka.clients.producer.internals.DefaultPartitioner
     receive.buffer.bytes=-1
-    request.timeout.ms=30000
+    request.timeout.ms=2000
     enable.idempotence=false
     max.in.flight.requests.per.connection=5
     metadata.max.age.ms=300000
@@ -64,7 +126,7 @@ data:
     auto.offset.reset=earliest
     client.dns.lookup=use_all_dns_ips
     connections.max.idle.ms=540000
-    default.api.timeout.ms=60000
+    default.api.timeout.ms=2000
     enable.auto.commit=false
     exclude.internal.topics=true
     fetch.max.bytes=52428800
@@ -73,7 +135,7 @@ data:
     max.poll.records=500
     # partition.assignment.strategy=org.apache.kafka.clients.consumer.CooperativeStickyAssignor
     receive.buffer.bytes=65536
-    request.timeout.ms=30000
+    request.timeout.ms=2000
     # sasl.client.callback.handler.class=
     # sasl.jaas.config=
     # sasl.kerberos.service.name=
@@ -135,7 +197,7 @@ kind: ClusterRole
 metadata:
   name: knative-kafka-broker-data-plane
   labels:
-    kafka.eventing.knative.dev/release: "devel"
+    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
 rules:
   - apiGroups:
       - "*"
@@ -166,7 +228,7 @@ metadata:
   name: knative-kafka-broker-data-plane
   namespace: knative-eventing
   labels:
-    kafka.eventing.knative.dev/release: "devel"
+    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
 
 ---
 # Copyright 2020 The Knative Authors
@@ -187,7 +249,7 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-kafka-broker-data-plane
   labels:
-    kafka.eventing.knative.dev/release: "devel"
+    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
 subjects:
   - kind: ServiceAccount
     name: knative-kafka-broker-data-plane
@@ -218,7 +280,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-broker-dispatcher
-    kafka.eventing.knative.dev/release: "devel"
+    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
 spec:
   selector:
     matchLabels:
@@ -228,7 +290,7 @@ spec:
       name: kafka-broker-dispatcher
       labels:
         app: kafka-broker-dispatcher
-        kafka.eventing.knative.dev/release: "devel"
+        kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
     spec:
       # To avoid node becoming SPOF, spread our replicas to different nodes and zones.
       topologySpreadConstraints:
@@ -252,7 +314,7 @@ spec:
         runAsNonRoot: true
       containers:
         - name: kafka-broker-dispatcher
-          image: gcr.io/knative-releases/knative-kafka-broker-dispatcher:cabd1d36c8b8214253bd49c5542bcbdab1bf86a879e3d262ebea8e53481ab474
+          image: gcr.io/knative-releases/knative-kafka-broker-dispatcher:v1.6.0
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /etc/config
@@ -310,12 +372,8 @@ spec:
             # This should be set according to initial delay seconds
             - name: WAIT_STARTUP_SECONDS
               value: "8"
-          command:
-            - "java"
-          args:
-            - "-Dlogback.configurationFile=/etc/logging/config.xml"
-            - "-jar"
-            - "/app/app.jar"
+            - name: JAVA_TOOL_OPTIONS
+              value: "-XX:+CrashOnOutOfMemoryError"
           # TODO set resources (limits and requests)
           livenessProbe:
             failureThreshold: 3
@@ -382,7 +440,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-broker-receiver
-    kafka.eventing.knative.dev/release: "devel"
+    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
 spec:
   selector:
     matchLabels:
@@ -392,7 +450,7 @@ spec:
       name: kafka-broker-receiver
       labels:
         app: kafka-broker-receiver
-        kafka.eventing.knative.dev/release: "devel"
+        kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
     spec:
       # To avoid node becoming SPOF, spread our replicas to different nodes and zones.
       topologySpreadConstraints:
@@ -416,7 +474,7 @@ spec:
         runAsNonRoot: true
       containers:
         - name: kafka-broker-receiver
-          image: gcr.io/knative-releases/knative-kafka-broker-receiver:a1e531d30aca3d3d502bfff8b178c385ce65cded0ef41e8b83551c8dadb1d02e
+          image: gcr.io/knative-releases/knative-kafka-broker-receiver:v1.6.0
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /etc/config
@@ -475,12 +533,8 @@ spec:
             # This should be set according to initial delay seconds
             - name: WAIT_STARTUP_SECONDS
               value: "8"
-          command:
-            - "java"
-          args:
-            - "-Dlogback.configurationFile=/etc/logging/config.xml"
-            - "-jar"
-            - "/app/app.jar"
+            - name: JAVA_TOOL_OPTIONS
+              value: "-XX:+CrashOnOutOfMemoryError"
           # TODO set resources (limits and requests)
           livenessProbe:
             failureThreshold: 3
@@ -532,13 +586,17 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-broker-receiver
-    kafka.eventing.knative.dev/release: "devel"
+    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
 spec:
   selector:
     app: kafka-broker-receiver
   ports:
     - name: http
       port: 80
+      protocol: TCP
+      targetPort: 8080
+    - name: http-container
+      port: 8080
       protocol: TCP
       targetPort: 8080
     - name: http-metrics
