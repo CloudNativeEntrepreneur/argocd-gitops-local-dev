@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: tls-auth-{{ $domain | replace "." "-" }}
+  labels:
+    jenkins.io/letsencrypt-service: production
+spec:
+  secretName: tls-auth-{{ $domain | replace "." "-" }}
+  issuerRef:
+    name: auth-{{ $domain | replace "." "-" }}
+    kind: Issuer
+  commonName: auth.{{ $domain }}
+  dnsNames:
+  - auth.{{ $domain }}
