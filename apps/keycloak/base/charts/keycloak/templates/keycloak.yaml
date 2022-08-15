@@ -7,3 +7,4 @@ metadata:
 spec:
   instances: 1
   hostname: auth.192.168.1.10.sslip.io
+  tlsSecret: aurelius-keycloak-tls
