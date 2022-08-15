@@ -1,12 +1,9 @@
-apiVersion: keycloak.org/v1alpha1
+apiVersion: keycloak.org/v2alpha1
 kind: Keycloak
 metadata:
-  name: auth
+  name: aurelius-keycloak
   labels:
-    keycloak: auth
-    app: auth
+    app: sso
 spec:
   instances: 1
-  externalAccess:
-    enabled: True
-    host: auth.192.168.1.10.sslip.io
+  hostname: auth.192.168.1.10.sslip.io
