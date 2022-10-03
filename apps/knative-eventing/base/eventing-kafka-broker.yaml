@@ -17,7 +17,7 @@ metadata:
   name: config-kafka-broker-data-plane
   namespace: knative-eventing
   labels:
-    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
+    kafka.eventing.knative.dev/release: "9080c987dc7eef0a49dede013076719bb60ce6d3"
   annotations:
     knative.dev/example-checksum: "57a32008"
 data:
@@ -115,7 +115,7 @@ data:
     value.deserializer=io.cloudevents.kafka.CloudEventDeserializer
     fetch.min.bytes=1
     heartbeat.interval.ms=3000
-    max.partition.fetch.bytes=1048576
+    max.partition.fetch.bytes=65536
     session.timeout.ms=10000
     # ssl.key.password=
     # ssl.keystore.location=
@@ -132,8 +132,8 @@ data:
     fetch.max.bytes=52428800
     isolation.level=read_uncommitted
     max.poll.interval.ms=300000
-    max.poll.records=500
-    # partition.assignment.strategy=org.apache.kafka.clients.consumer.CooperativeStickyAssignor
+    max.poll.records=50
+    partition.assignment.strategy=org.apache.kafka.clients.consumer.StickyAssignor
     receive.buffer.bytes=65536
     request.timeout.ms=2000
     # sasl.client.callback.handler.class=
@@ -175,6 +175,7 @@ data:
     # ssl.trustmanager.algorithm
   config-kafka-broker-webclient.properties: |
     idleTimeout=10000
+    maxPoolSize=100
   config-kafka-broker-httpserver.properties: |
     idleTimeout=0
 
@@ -197,7 +198,7 @@ kind: ClusterRole
 metadata:
   name: knative-kafka-broker-data-plane
   labels:
-    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
+    kafka.eventing.knative.dev/release: "9080c987dc7eef0a49dede013076719bb60ce6d3"
 rules:
   - apiGroups:
       - "*"
@@ -228,7 +229,7 @@ metadata:
   name: knative-kafka-broker-data-plane
   namespace: knative-eventing
   labels:
-    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
+    kafka.eventing.knative.dev/release: "9080c987dc7eef0a49dede013076719bb60ce6d3"
 
 ---
 # Copyright 2020 The Knative Authors
@@ -249,7 +250,7 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-kafka-broker-data-plane
   labels:
-    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
+    kafka.eventing.knative.dev/release: "9080c987dc7eef0a49dede013076719bb60ce6d3"
 subjects:
   - kind: ServiceAccount
     name: knative-kafka-broker-data-plane
@@ -280,7 +281,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-broker-dispatcher
-    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
+    kafka.eventing.knative.dev/release: "9080c987dc7eef0a49dede013076719bb60ce6d3"
 spec:
   selector:
     matchLabels:
@@ -290,7 +291,7 @@ spec:
       name: kafka-broker-dispatcher
       labels:
         app: kafka-broker-dispatcher
-        kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
+        kafka.eventing.knative.dev/release: "9080c987dc7eef0a49dede013076719bb60ce6d3"
     spec:
       # To avoid node becoming SPOF, spread our replicas to different nodes and zones.
       topologySpreadConstraints:
@@ -314,7 +315,7 @@ spec:
         runAsNonRoot: true
       containers:
         - name: kafka-broker-dispatcher
-          image: gcr.io/knative-releases/knative-kafka-broker-dispatcher:v1.6.0
+          image: gcr.io/knative-releases/knative-kafka-broker-dispatcher:v1.7.2
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /etc/config
@@ -440,7 +441,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-broker-receiver
-    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
+    kafka.eventing.knative.dev/release: "9080c987dc7eef0a49dede013076719bb60ce6d3"
 spec:
   selector:
     matchLabels:
@@ -450,7 +451,7 @@ spec:
       name: kafka-broker-receiver
       labels:
         app: kafka-broker-receiver
-        kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
+        kafka.eventing.knative.dev/release: "9080c987dc7eef0a49dede013076719bb60ce6d3"
     spec:
       # To avoid node becoming SPOF, spread our replicas to different nodes and zones.
       topologySpreadConstraints:
@@ -474,7 +475,7 @@ spec:
         runAsNonRoot: true
       containers:
         - name: kafka-broker-receiver
-          image: gcr.io/knative-releases/knative-kafka-broker-receiver:v1.6.0
+          image: gcr.io/knative-releases/knative-kafka-broker-receiver:v1.7.2
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /etc/config
@@ -586,7 +587,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-broker-receiver
-    kafka.eventing.knative.dev/release: "d4c078f97f978a784bdb579b71c133846fa81526"
+    kafka.eventing.knative.dev/release: "9080c987dc7eef0a49dede013076719bb60ce6d3"
 spec:
   selector:
     app: kafka-broker-receiver
