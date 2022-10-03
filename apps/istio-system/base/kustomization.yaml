@@ -5,12 +5,12 @@ helmCharts:
 - name: base
   includeCRDs: true
   releaseName: istio-base
-  version: 1.14.3
+  version: 1.15.1
   repo: https://istio-release.storage.googleapis.com/charts
   namespace: istio-system
 - name: istiod
   includeCRDs: true
   releaseName: istiod
-  version: 1.14.3
+  version: 1.15.1
   repo: https://istio-release.storage.googleapis.com/charts
   namespace: istio-system
