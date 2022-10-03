@@ -5,7 +5,6 @@ metadata:
     argocd-autopilot.argoproj-labs.io/default-dest-server: https://kubernetes.default.svc
     argocd.argoproj.io/sync-options: PruneLast=true
     argocd.argoproj.io/sync-wave: "-2"
-  creationTimestamp: null
   name: dev
   namespace: argocd
 spec:
@@ -29,7 +28,6 @@ kind: ApplicationSet
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
-  creationTimestamp: null
   name: dev
   namespace: argocd
 spec:
@@ -93,56 +91,3 @@ spec:
           prune: true
           selfHeal: true
 status: {}
-
-# ---
-
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: dev-kube-prometheus-stack
-#   namespace: argocd
-#   annotations:
-#     argocd.argoproj.io/sync-wave: "10"
-# spec:
-#   destination:
-#     name: in-cluster
-#     namespace: observability
-#   project: default
-#   source:
-#     repoURL: 'https://prometheus-community.github.io/helm-charts'
-#     targetRevision: 35.0.3
-#     helm:
-#       skipCrds: true
-#       values: |-
-#         #Snip the values
-#     chart: kube-prometheus-stack
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: dev-kube-prometheus-stack-crds
-#   namespace: argocd
-#   annotations:
-#     argocd.argoproj.io/sync-wave: "2"
-# spec:
-#   destination:
-#     name: in-cluster
-#     namespace: observability
-#   project: default
-#   source:
-#     repoURL: https://github.com/prometheus-community/helm-charts.git
-#     path: charts/kube-prometheus-stack/crds/
-#     targetRevision: kube-prometheus-stack-35.0.3
-#     directory:
-#       recurse: true
-#   syncPolicy:
-#     syncOptions:
-#       - Replace=true
-#     automated:
-#       prune: true
-#       selfHeal: true
