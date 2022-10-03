@@ -1,17 +1,12 @@
-apiVersion: operator.knative.dev/v1alpha1
+apiVersion: operator.knative.dev/v1beta1
 kind: KnativeServing
 metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
+  ingress:
+    kourier:
+      enabled: true
   config:
-    # domain:
-    #   127.0.0.1.nip.io: ""
-    # istio:
-    #   local-gateway.istio-ingress.knative-local-gateway: "knative-local-gateway.istio-ingress.svc.cluster.local"
-    features:
-      kubernetes.podspec-affinity: "enabled"
-    # network:
-    #   namespace-wildcard-cert-selector: '{"matchExpressions": [{"key":"networking.knative.dev/disableWildcardCert", "operator": "NotIn", "values":["true"]}]}'
-  # high-availability:
-  #   replicas: 3
+    network:
+      ingress-class: "kourier.ingress.networking.knative.dev"

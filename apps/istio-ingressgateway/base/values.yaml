@@ -1,4 +1,0 @@
-name: istio-ingressgateway
-labels:
-  app: istio-ingressgateway
-  istio: ingressgateway
