@@ -18,6 +18,10 @@ spec:
     jsonPointers:
     - /status
     kind: Application
+  - group: apps
+    jsonPointers:
+    - /status
+    kind: StatefulSet
   project: default
   source:
     path: projects
