@@ -1,0 +1,10 @@
+{
+  "appName": "demo-hasura",
+  "userGivenName": "demo-hasura",
+  "destNamespace": "staging",
+  "destServer": "https://kubernetes.default.svc",
+  "srcPath": "apps/demo-hasura/overlays/staging",
+  "srcRepoURL": "https://github.com/CloudNativeEntrepreneur/argocd-gitops-local-dev.git",
+  "srcTargetRevision": "",
+  "labels": null
+}
