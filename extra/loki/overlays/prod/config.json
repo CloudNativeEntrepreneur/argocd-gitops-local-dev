@@ -4,7 +4,7 @@
   "destNamespace": "observability",
   "destServer": "https://kubernetes.default.svc",
   "srcPath": "apps/loki/overlays/prod",
-  "srcRepoURL": "https://github.com/stealth-aurelius/local-dev-cluster.git",
+  "srcRepoURL": "https://github.com/CloudNativeEntrepreneur/argocd-gitops-local-dev.git",
   "srcTargetRevision": "",
   "labels": null
 }

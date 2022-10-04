@@ -35,5 +35,5 @@ download-schemahero:
 onboard:
 	kubectl ctx rancher-desktop
 	@echo "Before this command will work, you must generate and set the environment variable 'GH_TOKEN'. Click the following link to generate a new token: https://github.com/settings/tokens/new?scopes=repo"
-	GIT_REPO=https://github.com/stealth-aurelius/local-dev-cluster argocd-autopilot repo bootstrap --recover
+	GIT_REPO=https://github.com/CloudNativeEntrepreneur/argocd-gitops-local-dev argocd-autopilot repo bootstrap --recover
 	@echo "✅ Configured"

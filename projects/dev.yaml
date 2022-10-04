@@ -35,7 +35,7 @@ spec:
   - git:
       files:
       - path: apps/**/dev/config.json
-      repoURL: https://github.com/stealth-aurelius/local-dev-cluster.git
+      repoURL: https://github.com/CloudNativeEntrepreneur/argocd-gitops-local-dev.git
       requeueAfterSeconds: 20
       revision: ""
       template:
@@ -48,7 +48,7 @@ spec:
   - git:
       files:
       - path: apps/**/dev/config_dir.json
-      repoURL: https://github.com/stealth-aurelius/local-dev-cluster.git
+      repoURL: https://github.com/CloudNativeEntrepreneur/argocd-gitops-local-dev.git
       requeueAfterSeconds: 20
       revision: ""
       template:

@@ -21,7 +21,7 @@ spec:
   project: default
   source:
     path: projects
-    repoURL: https://github.com/stealth-aurelius/local-dev-cluster.git
+    repoURL: https://github.com/CloudNativeEntrepreneur/argocd-gitops-local-dev.git
   syncPolicy:
     automated:
       allowEmpty: true
