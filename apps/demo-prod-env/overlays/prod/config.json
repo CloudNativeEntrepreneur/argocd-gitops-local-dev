@@ -1,9 +1,9 @@
 {
-  "appName": "demo-hasura",
-  "userGivenName": "demo-hasura",
+  "appName": "demo-prod-env",
+  "userGivenName": "demo-prod-env",
   "destNamespace": "prod",
   "destServer": "https://kubernetes.default.svc",
-  "srcPath": "apps/demo-hasura/overlays/prod",
+  "srcPath": "apps/demo-prod-env/overlays/prod",
   "srcRepoURL": "https://github.com/CloudNativeEntrepreneur/argocd-gitops-local-dev.git",
   "srcTargetRevision": "",
   "labels": null
