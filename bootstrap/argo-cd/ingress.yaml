@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/component: server
     app.kubernetes.io/part-of: argocd
 spec:
+  ingressClassName: kourier.ingress.networking.knative.dev
   rules:
     - host: argocd.127.0.0.1.sslip.io
       http:
