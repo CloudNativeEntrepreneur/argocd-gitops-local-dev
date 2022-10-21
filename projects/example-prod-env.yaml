@@ -24,19 +24,19 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: example-production
+  name: example-prod-env
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: example-production
+  project: example-prod-env
   source:
     repoURL: https://github.com/cloudnativeentrepreneur/example-prod-env.git
     targetRevision: HEAD
     path: helm
   destination:
     server: https://kubernetes.default.svc
-    namespace: example-production
+    namespace: example-prod-env
   syncPolicy:
     automated:
       selfHeal: true
