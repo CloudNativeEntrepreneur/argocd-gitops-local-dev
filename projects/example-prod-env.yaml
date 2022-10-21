@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: example-production
+  name: example-prod-env
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: Example Domain Production project
+  description: Example Domain Production Environment
   sourceRepos:
   - '*'
   destinations:
