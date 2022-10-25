@@ -1,3 +1,20 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: example-prod-env
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: example-prod-env
+  imagePullSecrets:
+    - name:  ghcr
+
+---
+
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
