@@ -10,8 +10,8 @@ kind: ServiceAccount
 metadata:
   name: default
   namespace: example-prod-env
-  imagePullSecrets:
-    - name:  ghcr
+imagePullSecrets:
+  - name:  ghcr
 
 ---
 
