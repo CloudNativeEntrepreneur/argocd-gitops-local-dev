@@ -38,6 +38,11 @@ spec:
     repoURL: https://github.com/cloudnativeentrepreneur/cluster-tooling.git
     targetRevision: HEAD
     path: helm/wave-0
+    helm:
+      version: v3
+      values: |
+        argocd:
+          project: local-cluster-tooling-wave-0
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
