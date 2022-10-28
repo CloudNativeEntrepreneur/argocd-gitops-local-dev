@@ -1,6 +1,10 @@
-# argocd-gitops-local-dev
+# example-gitops
 
-Gitops config for a local development cluster for developing event-driven architectures.
+Gitops config for a local cluster showing full CI/CD pipelines using Github Actions and ArgoCD. The deployed "example domain" shows off a few examples:
+
+1. An example Sveltekit application with web3auth and a todo applications
+2. A full CQRS/ES backend for a ToDo applications with Hasura and microservices
+3. A web3auth server
 
 To get started, first log in to GHCR, then apply the gitops config using argocd autopilot.
 
