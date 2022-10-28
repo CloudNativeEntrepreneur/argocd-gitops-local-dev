@@ -1,9 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-- ../../base
-# patch the container image with kustomize to "1.0.0" from ghcr.io
-images:
-- name: ghcr.io/cloudnativeentrepreneur/demo-hasura
-  newName: ghcr.io/cloudnativeentrepreneur/demo-hasura
-  newTag: "1.0.0"
