@@ -37,7 +37,7 @@ spec:
   source:
     repoURL: https://github.com/cloudnativeentrepreneur/cluster-tooling.git
     targetRevision: HEAD
-    path: helm/wave-0
+    path: helm
     helm:
       version: v3
       values: |
