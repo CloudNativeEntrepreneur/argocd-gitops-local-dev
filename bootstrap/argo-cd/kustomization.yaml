@@ -23,10 +23,6 @@ configMapGenerator:
   - |
     resource.customizations.ignoreDifferences.admissionregistration.k8s.io_ValidatingWebhookConfiguration=jqPathExpressions:
       - '.webhooks[]?.failurePolicy'
-  - |
-    resource.compareoptions: |
-      # disables status field diffing in specified resource types
-      ignoreAggregatedRoles: true
   name: argocd-cm
 - behavior: merge
   literals:
