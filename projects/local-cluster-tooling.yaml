@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: local-cluster-tooling-wave-0
+  name: local-cluster-tooling
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "-1"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: Cluster Tooling wave 0 (things that create CRDs needed it later waves)
+  description: Cluster Tooling
   sourceRepos:
   - '*'
   destinations:
@@ -26,14 +26,14 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: local-cluster-tooling-wave-0
+  name: local-cluster-tooling
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "-1"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: local-cluster-tooling-wave-0
+  project: local-cluster-tooling
   source:
     repoURL: https://github.com/cloudnativeentrepreneur/cluster-tooling.git
     targetRevision: HEAD
@@ -42,7 +42,7 @@ spec:
       version: v3
       values: |
         argocd:
-          project: local-cluster-tooling-wave-0
+          project: local-cluster-tooling
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
