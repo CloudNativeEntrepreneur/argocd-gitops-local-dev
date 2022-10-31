@@ -17,7 +17,6 @@ Log in to your container registry with:
 ```
 kubectl create ns example-prod-env
 kubectl -n example-prod-env create secret docker-registry ghcr --docker-server=https://ghcr.io --docker-username=<your-github-username> --docker-password=<github_PAT_packages:read> --docker-email=<your-github-email>
-kubectl -n example-prod-env patch serviceaccount default -p '{"imagePullSecrets": [{"name": "ghcr"}]}'
 ```
 
 # Apply this config with argocd autopilot
