@@ -16,6 +16,7 @@ configMapGenerator:
       - pilot-discovery
       - clusterrole-aggregation-controller
       - k3s
+      - argocd-controller
   - |
     resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration=jqPathExpressions:
       - '.webhooks[]?.clientConfig.caBundle'
